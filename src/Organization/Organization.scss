@@ -1,0 +1,9 @@
+@import "../shared.scss";
+
+.issues-list {
+  &__title {
+    svg {
+      margin-right: $spacer-1;
+    }
+  }
+}

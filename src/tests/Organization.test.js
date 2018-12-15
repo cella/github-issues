@@ -25,19 +25,31 @@ const mocks = [
                 {
                   node: {
                     id: 0,
-                    title: "this is a issue 1"
+                    number: 0,
+                    title: "this is a issue 1",
+                    author: {
+                      login: "bluesclues"
+                    }
                   }
                 },
                 {
                   node: {
                     id: 1,
-                    title: "this is a issue 2"
+                    number: 1,
+                    title: "this is a issue 2",
+                    author: {
+                      login: "spongebob"
+                    }
                   }
                 },
                 {
                   node: {
                     id: 2,
-                    title: "this is a issue 3"
+                    number: 2,
+                    title: "this is a issue 3",
+                    author: {
+                      login: "louislouis"
+                    }
                   }
                 }
               ],
@@ -103,7 +115,7 @@ it("should render total count", async () => {
   );
 
   await wait(0); // wait for response
-  const p = component.root.findByType("p");
+  const p = component.root.findByType("h2");
 
   expect(p.children).toContain("200");
 });

@@ -1,0 +1,20 @@
+@import "../shared.scss";
+
+.open.octicon {
+  color: $green-500;
+}
+
+.issue-item {
+  display: grid;
+  grid-column-gap: $spacer-1;
+  grid-template-columns: $spacer-3 auto;
+
+  &__title {
+    font-size: $h4-size;
+    font-weight: $font-weight-bold;
+  }
+
+  &__subtitle {
+    grid-column: 2 / 2;
+  }
+}
