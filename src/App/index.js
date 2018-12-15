@@ -5,7 +5,7 @@ class App extends Component {
   render() {
     return (
       <div>
-        <Organization name="atom" />
+        <Organization org="atom" repo="atom" />
       </div>
     );
   }

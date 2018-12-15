@@ -1,26 +1,31 @@
 import React from "react";
 import { Query } from "react-apollo";
 import gql from "graphql-tag";
-import RepositoryList from "../RepositoryList";
+import IssueList from "../IssueList";
 
 export const GET_ORGANIZATION_QUERY = gql`
-  query($name: String!) {
-    organization(login: $name) {
+  query($org: String!, $repo: String!) {
+    organization(login: $org) {
       name
-      repositories(first: 6) {
-        edges {
-          node {
-            id
-            name
+      repository(name: $repo) {
+        id
+        name
+        issues(first: 25, states: [OPEN]) {
+          edges {
+            node {
+              id
+              title
+            }
           }
+          totalCount
         }
       }
     }
   }
 `;
 
-export const Organization = ({ name }) => (
-  <Query query={GET_ORGANIZATION_QUERY} variables={{ name }}>
+export const Organization = ({ org, repo }) => (
+  <Query query={GET_ORGANIZATION_QUERY} variables={{ org, repo }}>
     {({ loading, error, data }) => {
       if (loading) return <p>Loading...</p>;
       if (error) return <p>Error</p>;
@@ -29,12 +34,12 @@ export const Organization = ({ name }) => (
 
       return (
         <div>
-          <h1>{organization.name} </h1>
+          <h1>
+            Open issues for {organization.name}/{organization.repository.name}
+          </h1>
+          <p>Total count: {organization.repository.issues.totalCount}</p>
           <ul>
-            <RepositoryList
-              loading={loading}
-              repositories={organization.repositories}
-            />
+            <IssueList issues={organization.repository.issues} />
           </ul>
         </div>
       );

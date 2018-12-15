@@ -1,7 +1,7 @@
 import React from "react";
 import { MockedProvider } from "react-apollo/test-utils";
 import ReactDOM from "react-dom";
-import RepositoryList from "../RepositoryList";
+import IssueList from "../IssueList";
 import { shallow } from "enzyme";
 
 const mocks = {
@@ -9,30 +9,31 @@ const mocks = {
     {
       node: {
         id: 0,
-        name: "fetch"
+        title: "this is a issue 1"
       }
     },
     {
       node: {
         id: 1,
-        name: "hub"
+        title: "this is a issue 2"
       }
     },
     {
       node: {
         id: 2,
-        name: "training-kit"
+        title: "this is a issue 3"
       }
     }
-  ]
+  ],
+  totalCount: 200
 };
 
-it("renders RepositoryList component successfully", () => {
-  const wrapper = shallow(<RepositoryList repositories={mocks} />);
+it("renders IssueList component successfully", () => {
+  const wrapper = shallow(<IssueList issues={mocks} />);
   expect(wrapper.exists()).toBe(true);
 });
 
-it("renders a list of repositories", () => {
-  const wrapper = shallow(<RepositoryList repositories={mocks} />);
+it("renders a list of issues", () => {
+  const wrapper = shallow(<IssueList issues={mocks} />);
   expect(wrapper.find("li")).toHaveLength(3);
 });
