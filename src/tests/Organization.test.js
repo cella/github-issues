@@ -2,6 +2,7 @@ import React from "react";
 import { MockedProvider } from "react-apollo/test-utils";
 import renderer from "react-test-renderer";
 import { GET_ORGANIZATION_QUERY, Organization } from "../Organization";
+import RepositoryList from "../RepositoryList";
 import wait from "waait";
 
 const mocks = [
@@ -14,7 +15,31 @@ const mocks = [
     },
     result: {
       data: {
-        organization: { name: "Github" }
+        organization: {
+          name: "Github",
+          repositories: {
+            edges: [
+              {
+                node: {
+                  id: 0,
+                  name: "fetch"
+                }
+              },
+              {
+                node: {
+                  id: 1,
+                  name: "hub"
+                }
+              },
+              {
+                node: {
+                  id: 2,
+                  name: "training-kit"
+                }
+              }
+            ]
+          }
+        }
       }
     }
   }
