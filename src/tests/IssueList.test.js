@@ -14,7 +14,18 @@ const mocks = {
         author: {
           login: "bluesclues"
         },
-        createdAt: "2018-12-15T22:50:54Z"
+        createdAt: "2018-12-15T22:50:54Z",
+        labels: {
+          edges: [
+            {
+              node: {
+                id: 0,
+                color: "fef2c0",
+                name: "feature"
+              }
+            }
+          ]
+        }
       }
     },
     {
@@ -25,7 +36,18 @@ const mocks = {
         author: {
           login: "spongebob"
         },
-        createdAt: "2018-12-14T22:50:54Z"
+        createdAt: "2018-12-14T22:50:54Z",
+        labels: {
+          edges: [
+            {
+              node: {
+                id: 1,
+                color: "fef2c0",
+                name: "feature"
+              }
+            }
+          ]
+        }
       }
     },
     {
@@ -36,7 +58,18 @@ const mocks = {
         author: {
           login: "louislouis"
         },
-        createdAt: "2018-12-13T22:50:54Z"
+        createdAt: "2018-12-13T22:50:54Z",
+        labels: {
+          edges: [
+            {
+              node: {
+                id: 2,
+                color: "fef2c0",
+                name: "feature"
+              }
+            }
+          ]
+        }
       }
     }
   ],

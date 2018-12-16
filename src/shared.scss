@@ -2,4 +2,8 @@
 
 .octicon {
   fill: currentColor;
+
+  &.open {
+    color: $green-500;
+  }
 }

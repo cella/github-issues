@@ -9,6 +9,7 @@ const IssueList = ({ issues }) =>
         title={node.title}
         author={node.author.login}
         createdAt={node.createdAt}
+        labels={node.labels}
       />
     </li>
   ));

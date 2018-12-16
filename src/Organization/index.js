@@ -25,6 +25,15 @@ export const GET_ORGANIZATION_QUERY = gql`
               number
               title
               createdAt
+              labels(first: 5) {
+                edges {
+                  node {
+                    id
+                    color
+                    name
+                  }
+                }
+              }
             }
           }
           totalCount
