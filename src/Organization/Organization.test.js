@@ -3,6 +3,7 @@ import { MemoryRouter } from "react-router-dom";
 import { MockedProvider } from "react-apollo/test-utils";
 import renderer from "react-test-renderer";
 import wait from "waait";
+import { mount, shallow } from "enzyme";
 import { GET_ISSUES_QUERY, Organization } from "../Organization";
 
 const mocks = [
@@ -91,6 +92,11 @@ const mocks = [
                   }
                 }
               ],
+              pageInfo: {
+                endCursor:
+                  "Y3Vyc29yOnYyOpK5MjAxOC0xMS0yMVQyMTo1NToyOC0wNTowMM4W2aUa",
+                hasNextPage: true
+              },
               totalCount: 200
             }
           }

@@ -7,8 +7,36 @@ import IssueIcon from "../IssueIcon";
 import IssueList from "../IssueList";
 import "./Organization.scss";
 
+const updateQuery = (previousResult, { fetchMoreResult }) => {
+  if (!fetchMoreResult) {
+    return previousResult;
+  }
+
+  return {
+    ...previousResult,
+    organization: {
+      ...previousResult.organization,
+      repository: {
+        ...previousResult.organization.repository,
+        issues: {
+          ...previousResult.organization.repository.issues,
+          ...fetchMoreResult.organization.repository.issues,
+          edges: [
+            ...previousResult.organization.repository.issues.edges,
+            ...fetchMoreResult.organization.repository.issues.edges
+          ]
+        }
+      }
+    }
+  };
+};
 export const GET_ISSUES_QUERY = gql`
-  query($org: String!, $repo: String!, $issueState: [IssueState!]) {
+  query(
+    $org: String!
+    $repo: String!
+    $issueState: [IssueState!]
+    $cursor: String
+  ) {
     organization(login: $org) {
       login
       repository(name: $repo) {
@@ -18,6 +46,7 @@ export const GET_ISSUES_QUERY = gql`
           first: 25
           orderBy: { field: CREATED_AT, direction: DESC }
           states: $issueState
+          after: $cursor
         ) {
           edges {
             node {
@@ -39,6 +68,10 @@ export const GET_ISSUES_QUERY = gql`
               }
             }
           }
+          pageInfo {
+            endCursor
+            hasNextPage
+          }
           totalCount
         }
       }
@@ -46,9 +79,9 @@ export const GET_ISSUES_QUERY = gql`
   }
 `;
 
-export const Organization = ({ org, repo, issueState, match }) => (
+export const Organization = ({ org, repo, issueState }) => (
   <Query query={GET_ISSUES_QUERY} variables={{ org, repo, issueState }}>
-    {({ loading, error, data }) => {
+    {({ loading, error, data, fetchMore }) => {
       if (loading) return <p>Loading...</p>;
       if (error) return <p>Error</p>;
 
@@ -94,6 +127,23 @@ export const Organization = ({ org, repo, issueState, match }) => (
               />
             </ul>
           </div>
+          <button
+            className="btn btn-block"
+            type="button"
+            onClick={() =>
+              fetchMore({
+                variables: {
+                  org,
+                  repo,
+                  issueState,
+                  cursor: organization.repository.issues.pageInfo.endCursor
+                },
+                updateQuery
+              })
+            }
+          >
+            Load More Issues
+          </button>
         </div>
       );
     }}
