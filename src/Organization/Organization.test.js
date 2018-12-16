@@ -30,36 +30,6 @@ it("should render loading state initially", () => {
   expect(tree.children).toContain("Loading...");
 });
 
-it("should render organization name", async () => {
-  const component = renderer.create(
-    <MemoryRouter>
-      <MockedProvider mocks={mocks} addTypename={false}>
-        <Organization org="github" repo="fetch" issueState="OPEN" />
-      </MockedProvider>
-    </MemoryRouter>
-  );
-
-  await wait(0); // wait for response
-  const p = component.root.findByType("h1");
-
-  expect(p.children).toContain("github");
-});
-
-it("should render repository name", async () => {
-  const component = renderer.create(
-    <MemoryRouter>
-      <MockedProvider mocks={mocks} addTypename={false}>
-        <Organization org="github" repo="fetch" issueState="OPEN" />
-      </MockedProvider>
-    </MemoryRouter>
-  );
-
-  await wait(0); // wait for response
-  const p = component.root.findByType("h1");
-
-  expect(p.children).toContain("fetch");
-});
-
 it("should render total count", async () => {
   const component = renderer.create(
     <MemoryRouter>

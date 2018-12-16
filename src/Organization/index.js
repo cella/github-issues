@@ -5,6 +5,7 @@ import { withRouter } from "react-router";
 import { GET_ISSUES_QUERY } from "../queries";
 import IssueIcon from "../IssueIcon";
 import IssueList from "../IssueList";
+import IssuesHeader from "../IssuesHeader";
 import "./Organization.scss";
 
 const updateQuery = (previousResult, { fetchMoreResult }) => {
@@ -41,29 +42,10 @@ export const Organization = ({ org, repo, issueState }) => (
 
       return (
         <div className="issues">
-          <div className="issues-header">
-            <h1 className="issues-header__title mt-2">
-              Github Issues for {organization.login}/
-              {organization.repository.name}
-            </h1>
-            <div className="BtnGroup mt-3 mb-3 issues-header__buttons">
-              <NavLink
-                to={`/${org}/${repo}`}
-                exact
-                activeClassName="btn-primary"
-                className="btn BtnGroup-item"
-              >
-                Open
-              </NavLink>
-              <NavLink
-                to={`/${org}/${repo}/closed`}
-                activeClassName="btn-primary"
-                className="btn BtnGroup-item"
-              >
-                Closed
-              </NavLink>
-            </div>
-          </div>
+          <IssuesHeader
+            org={organization.login}
+            repo={organization.repository.name}
+          />
 
           <div className="Box issues-list">
             <div className="Box-header issues-list-header">
