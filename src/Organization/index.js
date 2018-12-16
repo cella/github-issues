@@ -46,7 +46,7 @@ export const GET_ISSUES_QUERY = gql`
   }
 `;
 
-export const Organization = ({ org, repo, issueState }) => (
+export const Organization = ({ org, repo, issueState, match }) => (
   <Query query={GET_ISSUES_QUERY} variables={{ org, repo, issueState }}>
     {({ loading, error, data }) => {
       if (loading) return <p>Loading...</p>;
@@ -63,7 +63,7 @@ export const Organization = ({ org, repo, issueState }) => (
             </h1>
             <div className="BtnGroup mt-3 mb-3 issues-header__buttons">
               <NavLink
-                to="/"
+                to={`/${org}/${repo}`}
                 exact
                 activeClassName="btn-primary"
                 className="btn BtnGroup-item"
@@ -71,7 +71,7 @@ export const Organization = ({ org, repo, issueState }) => (
                 Open
               </NavLink>
               <NavLink
-                to="/closed"
+                to={`/${org}/${repo}/closed`}
                 activeClassName="btn-primary"
                 className="btn BtnGroup-item"
               >

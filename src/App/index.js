@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Route } from "react-router-dom";
+import { Route, Redirect } from "react-router-dom";
 import Organization from "../Organization";
 
 class App extends Component {
@@ -10,19 +10,53 @@ class App extends Component {
           exact
           path="/"
           component={() => (
-            <div>
-              <Organization org="atom" repo="atom" issueState="OPEN" />
-            </div>
+            <Redirect
+              to={{
+                pathname: "/atom/atom"
+              }}
+            />
           )}
         />
         <Route
           exact
-          path="/closed"
+          path="/:org"
           component={() => (
-            <div>
-              <Organization org="atom" repo="atom" issueState="CLOSED" />
-            </div>
+            <Redirect
+              to={{
+                pathname: "/atom/atom"
+              }}
+            />
           )}
+        />
+        <Route
+          exact
+          path="/:org/:repo"
+          component={props => {
+            return (
+              <div>
+                <Organization
+                  org={props.match.params.org}
+                  repo={props.match.params.repo}
+                  issueState="OPEN"
+                />
+              </div>
+            );
+          }}
+        />
+        <Route
+          exact
+          path="/:org/:repo/closed"
+          component={props => {
+            return (
+              <div>
+                <Organization
+                  org={props.match.params.org}
+                  repo={props.match.params.repo}
+                  issueState="CLOSED"
+                />
+              </div>
+            );
+          }}
         />
       </div>
     );
