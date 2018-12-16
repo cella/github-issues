@@ -1,6 +1,6 @@
-#Github Issues Viewer with React, Apollo, and Github GraphQL API
+# Github Issues Viewer with React, Apollo, and Github GraphQL API
 
-##Features
+## Features
 
 - React (bootstrapped with create-react-app)
 - React Router
@@ -9,7 +9,7 @@
 - Primer design system
 - Responsive
 
-##Installation
+## Installation
 
 1. `git clone git@github.com:cella/github-issues.git`
 2. `cd github-issues`
