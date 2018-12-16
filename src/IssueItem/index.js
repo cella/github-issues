@@ -18,12 +18,12 @@ const IssueItem = ({
         <IssueIcon issueState={issueState} />
       </div>
       <div className="issue-item__title">{title}</div>
-      <div className="issue-item__created">
-        <span className="issue-item__number">#{number}</span> opened{" "}
-        <span className="issue-item__date">
+      <div className="issue-item-created">
+        <span className="issue-item-created__number">#{number}</span> opened{" "}
+        <span className="issue-item-created__date">
           <Moment fromNow date={createdAt} />
         </span>{" "}
-        by <span className="issue-item__author">{author}</span>
+        by <span className="issue-item-created__author">{author}</span>
       </div>
       <div className="issue-item__labels">
         <ul>

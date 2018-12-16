@@ -10,10 +10,6 @@
     font-weight: $font-weight-bold;
   }
 
-  &__created {
-    grid-column: 2 / 2;
-  }
-
   &__labels {
     grid-column: 2 / 2;
     margin-top: $spacer-2;
@@ -24,5 +20,9 @@
         display: inline-block;
       }
     }
+  }
+
+  .issue-item-created {
+    grid-column: 2 / 2;
   }
 }

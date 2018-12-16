@@ -27,12 +27,12 @@ it("renders title", () => {
 
 it("renders author", () => {
   const wrapper = shallow(<IssueItem author="yogi" />);
-  expect(wrapper.find(".issue-item__author").text()).toEqual("yogi");
+  expect(wrapper.find(".issue-item-created__author").text()).toEqual("yogi");
 });
 
 it("renders number", () => {
   const wrapper = shallow(<IssueItem number="0" />);
-  expect(wrapper.find(".issue-item__number").text()).toEqual("#0");
+  expect(wrapper.find(".issue-item-created__number").text()).toEqual("#0");
 });
 
 it("renders relative from now date", () => {
@@ -41,5 +41,7 @@ it("renders relative from now date", () => {
   const wrapper = mount(
     <IssueItem createdAt="2017-02-12T22:50:54Z" labels={mocks} />
   );
-  expect(wrapper.find(".issue-item__date").text()).toEqual("2 days ago");
+  expect(wrapper.find(".issue-item-created__date").text()).toEqual(
+    "2 days ago"
+  );
 });
