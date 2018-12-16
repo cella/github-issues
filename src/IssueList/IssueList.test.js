@@ -85,3 +85,8 @@ it("renders a list of issues", () => {
   const wrapper = shallow(<IssueList issues={mocks} />);
   expect(wrapper.find("li")).toHaveLength(3);
 });
+
+it("renders blank slate", () => {
+  const wrapper = shallow(<IssueList />);
+  expect(wrapper.find("li")).toHaveLength(0);
+});
