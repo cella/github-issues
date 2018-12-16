@@ -1,8 +1,8 @@
 import React from "react";
-import { MockedProvider } from "react-apollo/test-utils";
 import ReactDOM from "react-dom";
-import IssueList from "../IssueList";
+import { MockedProvider } from "react-apollo/test-utils";
 import { shallow } from "enzyme";
+import IssueList from "../IssueList";
 
 const mocks = {
   edges: [

@@ -1,7 +1,6 @@
 import React, { Component } from "react";
-import Organization from "../Organization";
 import { Route } from "react-router-dom";
-import "./App.scss";
+import Organization from "../Organization";
 
 class App extends Component {
   render() {

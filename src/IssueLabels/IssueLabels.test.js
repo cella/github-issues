@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import IssueLabels from "../IssueLabels";
 import { shallow, mount } from "enzyme";
+import IssueLabels from "../IssueLabels";
 
 const mocks = {
   edges: [

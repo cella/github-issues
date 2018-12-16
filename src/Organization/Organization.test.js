@@ -1,9 +1,9 @@
 import React from "react";
+import { MemoryRouter } from "react-router-dom";
 import { MockedProvider } from "react-apollo/test-utils";
 import renderer from "react-test-renderer";
-import { GET_ISSUES_QUERY, Organization } from "../Organization";
 import wait from "waait";
-import { MemoryRouter } from "react-router-dom";
+import { GET_ISSUES_QUERY, Organization } from "../Organization";
 
 const mocks = [
   {

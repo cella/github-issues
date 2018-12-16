@@ -1,10 +1,10 @@
 import React from "react";
-import { Query } from "react-apollo";
-import gql from "graphql-tag";
-import IssueList from "../IssueList";
-import IssueIcon from "../IssueIcon";
 import { NavLink } from "react-router-dom";
+import { Query } from "react-apollo";
 import { withRouter } from "react-router";
+import gql from "graphql-tag";
+import IssueIcon from "../IssueIcon";
+import IssueList from "../IssueList";
 import "./Organization.scss";
 
 export const GET_ISSUES_QUERY = gql`

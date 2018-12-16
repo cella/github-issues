@@ -1,8 +1,7 @@
 import React from "react";
 import Moment from "react-moment";
-import IssueLabels from "../IssueLabels";
 import IssueIcon from "../IssueIcon";
-
+import IssueLabels from "../IssueLabels";
 import "./IssueItem.scss";
 
 const IssueItem = ({
