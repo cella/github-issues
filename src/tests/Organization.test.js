@@ -1,22 +1,24 @@
 import React from "react";
 import { MockedProvider } from "react-apollo/test-utils";
 import renderer from "react-test-renderer";
-import { GET_ORGANIZATION_QUERY, Organization } from "../Organization";
+import { GET_ISSUES_QUERY, Organization } from "../Organization";
 import wait from "waait";
+import { MemoryRouter } from "react-router-dom";
 
 const mocks = [
   {
     request: {
-      query: GET_ORGANIZATION_QUERY,
+      query: GET_ISSUES_QUERY,
       variables: {
         org: "github",
-        repo: "fetch"
+        repo: "fetch",
+        issueState: "OPEN"
       }
     },
     result: {
       data: {
         organization: {
-          name: "Github",
+          login: "github",
           repository: {
             id: "0",
             name: "fetch",
@@ -100,17 +102,21 @@ const mocks = [
 
 it("renders without error", () => {
   renderer.create(
-    <MockedProvider mocks={mocks} addTypename={false}>
-      <Organization org="github" repo="fetch" />
-    </MockedProvider>
+    <MemoryRouter>
+      <MockedProvider mocks={mocks} addTypename={false}>
+        <Organization org="github" repo="fetch" issueState="OPEN" />
+      </MockedProvider>
+    </MemoryRouter>
   );
 });
 
 it("should render loading state initially", () => {
   const component = renderer.create(
-    <MockedProvider mocks={[]}>
-      <Organization />
-    </MockedProvider>
+    <MemoryRouter>
+      <MockedProvider mocks={[]}>
+        <Organization />
+      </MockedProvider>
+    </MemoryRouter>
   );
 
   const tree = component.toJSON();
@@ -119,22 +125,26 @@ it("should render loading state initially", () => {
 
 it("should render organization name", async () => {
   const component = renderer.create(
-    <MockedProvider mocks={mocks} addTypename={false}>
-      <Organization org="github" repo="fetch" />
-    </MockedProvider>
+    <MemoryRouter>
+      <MockedProvider mocks={mocks} addTypename={false}>
+        <Organization org="github" repo="fetch" issueState="OPEN" />
+      </MockedProvider>
+    </MemoryRouter>
   );
 
   await wait(0); // wait for response
   const p = component.root.findByType("h1");
 
-  expect(p.children).toContain("Github");
+  expect(p.children).toContain("github");
 });
 
 it("should render repository name", async () => {
   const component = renderer.create(
-    <MockedProvider mocks={mocks} addTypename={false}>
-      <Organization org="github" repo="fetch" />
-    </MockedProvider>
+    <MemoryRouter>
+      <MockedProvider mocks={mocks} addTypename={false}>
+        <Organization org="github" repo="fetch" issueState="OPEN" />
+      </MockedProvider>
+    </MemoryRouter>
   );
 
   await wait(0); // wait for response
@@ -145,9 +155,11 @@ it("should render repository name", async () => {
 
 it("should render total count", async () => {
   const component = renderer.create(
-    <MockedProvider mocks={mocks} addTypename={false}>
-      <Organization org="github" repo="fetch" />
-    </MockedProvider>
+    <MemoryRouter>
+      <MockedProvider mocks={mocks} addTypename={false}>
+        <Organization org="github" repo="fetch" issueState="OPEN" />
+      </MockedProvider>
+    </MemoryRouter>
   );
 
   await wait(0); // wait for response
@@ -155,20 +167,22 @@ it("should render total count", async () => {
 
   expect(p.children).toContain("200");
 });
-
+//
 it("should render error", async () => {
   const orgMock = {
     request: {
-      query: GET_ORGANIZATION_QUERY,
-      variables: { org: "github", repo: "fetch" }
+      query: GET_ISSUES_QUERY,
+      variables: { org: "github", repo: "fetch", issueState: "OPEN" }
     },
     error: new Error()
   };
 
   const component = renderer.create(
-    <MockedProvider mocks={[orgMock]} addTypename={false}>
-      <Organization org="github" repo="fetch" />
-    </MockedProvider>
+    <MemoryRouter>
+      <MockedProvider mocks={[orgMock]} addTypename={false}>
+        <Organization org="github" repo="fetch" issueState="OPEN" />
+      </MockedProvider>
+    </MemoryRouter>
   );
 
   await wait(0); // wait for response

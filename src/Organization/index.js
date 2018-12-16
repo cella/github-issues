@@ -2,19 +2,22 @@ import React from "react";
 import { Query } from "react-apollo";
 import gql from "graphql-tag";
 import IssueList from "../IssueList";
+import IssueIcon from "../IssueIcon";
+import { NavLink } from "react-router-dom";
+import { withRouter } from "react-router";
 import "./Organization.scss";
 
-export const GET_ORGANIZATION_QUERY = gql`
-  query($org: String!, $repo: String!) {
+export const GET_ISSUES_QUERY = gql`
+  query($org: String!, $repo: String!, $issueState: [IssueState!]) {
     organization(login: $org) {
-      name
+      login
       repository(name: $repo) {
         id
         name
         issues(
           first: 25
           orderBy: { field: CREATED_AT, direction: DESC }
-          states: [OPEN]
+          states: $issueState
         ) {
           edges {
             node {
@@ -43,8 +46,8 @@ export const GET_ORGANIZATION_QUERY = gql`
   }
 `;
 
-export const Organization = ({ org, repo }) => (
-  <Query query={GET_ORGANIZATION_QUERY} variables={{ org, repo }}>
+export const Organization = ({ org, repo, issueState }) => (
+  <Query query={GET_ISSUES_QUERY} variables={{ org, repo, issueState }}>
     {({ loading, error, data }) => {
       if (loading) return <p>Loading...</p>;
       if (error) return <p>Error</p>;
@@ -52,32 +55,43 @@ export const Organization = ({ org, repo }) => (
       const { organization } = data;
 
       return (
-        <div>
-          <h1>
-            Github Issues for {organization.name}/{organization.repository.name}
-          </h1>
+        <div className="issues">
+          <div className="issues-header">
+            <h1 className="issues-header__title mt-2">
+              Github Issues for {organization.login}/
+              {organization.repository.name}
+            </h1>
+            <div className="BtnGroup mt-3 mb-3 issues-header__buttons">
+              <NavLink
+                to="/"
+                exact
+                activeClassName="btn-primary"
+                className="btn BtnGroup-item"
+              >
+                Open
+              </NavLink>
+              <NavLink
+                to="/closed"
+                activeClassName="btn-primary"
+                className="btn BtnGroup-item"
+              >
+                Closed
+              </NavLink>
+            </div>
+          </div>
 
           <div className="Box issues-list">
-            <div className="Box-header issues-list__header">
-              <h2 className="Box-title issues-list__title">
-                <svg
-                  className="octicon octicon-issue-opened"
-                  viewBox="0 0 14 16"
-                  version="1.1"
-                  width="14"
-                  height="16"
-                  aria-hidden="true"
-                >
-                  <path
-                    fillRule="evenodd"
-                    d="M7 2.3c3.14 0 5.7 2.56 5.7 5.7s-2.56 5.7-5.7 5.7A5.71 5.71 0 0 1 1.3 8c0-3.14 2.56-5.7 5.7-5.7zM7 1C3.14 1 0 4.14 0 8s3.14 7 7 7 7-3.14 7-7-3.14-7-7-7zm1 3H6v5h2V4zm0 6H6v2h2v-2z"
-                  />
-                </svg>
-                {organization.repository.issues.totalCount} Open
+            <div className="Box-header issues-list-header">
+              <h2 className="Box-title issues-list-header__title">
+                <IssueIcon issueState={issueState} />
+                {organization.repository.issues.totalCount} {issueState}
               </h2>
             </div>
             <ul>
-              <IssueList issues={organization.repository.issues} />
+              <IssueList
+                issues={organization.repository.issues}
+                issueState={issueState}
+              />
             </ul>
           </div>
         </div>
@@ -86,4 +100,4 @@ export const Organization = ({ org, repo }) => (
   </Query>
 );
 
-export default Organization;
+export default withRouter(Organization);

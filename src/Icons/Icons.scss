@@ -1,0 +1,13 @@
+@import "../shared.scss";
+
+.octicon {
+  fill: currentColor;
+
+  &.open {
+    color: $green-500;
+  }
+
+  &.closed {
+    color: $red-500;
+  }
+}

@@ -1,9 +1,21 @@
 @import "../shared.scss";
 
-.issues-list {
+.issues-list-header {
   &__title {
     svg {
       margin-right: $spacer-1;
     }
+  }
+}
+
+.issues-header {
+  overflow: hidden;
+
+  &__title {
+    float: left;
+  }
+
+  &__buttons {
+    float: right;
   }
 }
