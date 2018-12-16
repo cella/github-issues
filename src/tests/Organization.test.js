@@ -29,7 +29,8 @@ const mocks = [
                     title: "this is a issue 1",
                     author: {
                       login: "bluesclues"
-                    }
+                    },
+                    createdAt: "2018-12-15T22:50:54Z"
                   }
                 },
                 {
@@ -39,7 +40,8 @@ const mocks = [
                     title: "this is a issue 2",
                     author: {
                       login: "spongebob"
-                    }
+                    },
+                    createdAt: "2018-12-14T22:50:54Z"
                   }
                 },
                 {
@@ -49,7 +51,8 @@ const mocks = [
                     title: "this is a issue 3",
                     author: {
                       login: "louislouis"
-                    }
+                    },
+                    createdAt: "2018-12-13T22:50:54Z"
                   }
                 }
               ],

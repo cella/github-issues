@@ -22,3 +22,10 @@ it("renders number", () => {
   const wrapper = mount(<IssueItem number="0" />);
   expect(wrapper.find(".issue-item__number").text()).toEqual("#0");
 });
+
+it("renders relative from now date", () => {
+  Date.now = jest.fn(() => 1487076708000); //14.02.2017
+
+  const wrapper = mount(<IssueItem createdAt="2017-02-12T22:50:54Z" />);
+  expect(wrapper.find(".issue-item__date").text()).toEqual("2 days ago");
+});

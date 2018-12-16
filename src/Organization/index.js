@@ -24,6 +24,7 @@ export const GET_ORGANIZATION_QUERY = gql`
               id
               number
               title
+              createdAt
             }
           }
           totalCount
@@ -48,8 +49,8 @@ export const Organization = ({ org, repo }) => (
           </h1>
 
           <div className="Box issues-list">
-            <div class="Box-header issues-list__header">
-              <h2 class="Box-title issues-list__title">
+            <div className="Box-header issues-list__header">
+              <h2 className="Box-title issues-list__title">
                 <svg
                   className="octicon octicon-issue-opened"
                   viewBox="0 0 14 16"
