@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Route, Redirect } from "react-router-dom";
-import Organization from "../Organization";
+import Repository from "../Repository";
 
 class App extends Component {
   render() {
@@ -19,7 +19,7 @@ class App extends Component {
         />
         <Route
           exact
-          path="/:org"
+          path="/:owner"
           component={() => (
             <Redirect
               to={{
@@ -30,12 +30,12 @@ class App extends Component {
         />
         <Route
           exact
-          path="/:org/:repo"
+          path="/:owner/:repo"
           component={props => {
             return (
               <div>
-                <Organization
-                  org={props.match.params.org}
+                <Repository
+                  owner={props.match.params.owner}
                   repo={props.match.params.repo}
                   issueState="OPEN"
                 />
@@ -45,12 +45,12 @@ class App extends Component {
         />
         <Route
           exact
-          path="/:org/:repo/closed"
+          path="/:owner/:repo/closed"
           component={props => {
             return (
               <div>
-                <Organization
-                  org={props.match.params.org}
+                <Repository
+                  owner={props.match.params.owner}
                   repo={props.match.params.repo}
                   issueState="CLOSED"
                 />

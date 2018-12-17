@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import { MemoryRouter } from "react-router-dom";
-import { Organization } from "../Organization";
+import { Repository } from "../Repository";
 import { shallow } from "enzyme";
 import ApolloClient from "apollo-boost";
 import renderer from "react-test-renderer";
@@ -21,12 +21,12 @@ it("redirects to atom open issues on initial route", () => {
       </MockedProvider>
     </MemoryRouter>
   );
-  expect(component.root.findByType(Organization).props.org).toBe("atom");
-  expect(component.root.findByType(Organization).props.repo).toBe("atom");
-  expect(component.root.findByType(Organization).props.issueState).toBe("OPEN");
+  expect(component.root.findByType(Repository).props.owner).toBe("atom");
+  expect(component.root.findByType(Repository).props.repo).toBe("atom");
+  expect(component.root.findByType(Repository).props.issueState).toBe("OPEN");
 });
 
-it("redirects to atom open issues on /org/ route", () => {
+it("redirects to atom open issues on /owner/ route", () => {
   const component = renderer.create(
     <MemoryRouter initialEntries={["/github"]}>
       <MockedProvider>
@@ -34,12 +34,12 @@ it("redirects to atom open issues on /org/ route", () => {
       </MockedProvider>
     </MemoryRouter>
   );
-  expect(component.root.findByType(Organization).props.org).toBe("atom");
-  expect(component.root.findByType(Organization).props.repo).toBe("atom");
-  expect(component.root.findByType(Organization).props.issueState).toBe("OPEN");
+  expect(component.root.findByType(Repository).props.owner).toBe("atom");
+  expect(component.root.findByType(Repository).props.repo).toBe("atom");
+  expect(component.root.findByType(Repository).props.issueState).toBe("OPEN");
 });
 
-it("renders open issues on /org/repo/ route", () => {
+it("renders open issues on /owner/repo/ route", () => {
   const component = renderer.create(
     <MemoryRouter initialEntries={["/github/fetch"]}>
       <MockedProvider>
@@ -47,9 +47,9 @@ it("renders open issues on /org/repo/ route", () => {
       </MockedProvider>
     </MemoryRouter>
   );
-  expect(component.root.findByType(Organization).props.org).toBe("github");
-  expect(component.root.findByType(Organization).props.repo).toBe("fetch");
-  expect(component.root.findByType(Organization).props.issueState).toBe("OPEN");
+  expect(component.root.findByType(Repository).props.owner).toBe("github");
+  expect(component.root.findByType(Repository).props.repo).toBe("fetch");
+  expect(component.root.findByType(Repository).props.issueState).toBe("OPEN");
 });
 
 it("renders closed issues on closed route", () => {
@@ -60,9 +60,9 @@ it("renders closed issues on closed route", () => {
       </MockedProvider>
     </MemoryRouter>
   );
-  expect(component.root.findByType(Organization).props.org).toBe("github");
-  expect(component.root.findByType(Organization).props.repo).toBe("fetch");
-  expect(component.root.findByType(Organization).props.issueState).toBe(
+  expect(component.root.findByType(Repository).props.owner).toBe("github");
+  expect(component.root.findByType(Repository).props.repo).toBe("fetch");
+  expect(component.root.findByType(Repository).props.issueState).toBe(
     "CLOSED"
   );
 });

@@ -1,5 +1,11 @@
 @import "../shared.scss";
 
+.issues-list {
+  &__button {
+    margin-bottom: $spacer-6
+  }
+}
+
 .issues-list-header {
   &__title {
     svg {

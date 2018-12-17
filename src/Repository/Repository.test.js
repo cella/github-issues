@@ -4,14 +4,14 @@ import { MockedProvider } from "react-apollo/test-utils";
 import renderer from "react-test-renderer";
 import wait from "waait";
 import { GET_ISSUES_QUERY } from "../queries";
-import { Organization } from "../Organization";
-import mocks from "../mocks/org-mocks";
+import { Repository } from "../Repository";
+import mocks from "../mocks/owner-mocks";
 
 it("renders without error", () => {
   renderer.create(
     <MemoryRouter>
       <MockedProvider mocks={mocks} addTypename={false}>
-        <Organization org="github" repo="fetch" issueState="OPEN" />
+        <Repository owner="github" repo="fetch" issueState="OPEN" />
       </MockedProvider>
     </MemoryRouter>
   );
@@ -21,7 +21,7 @@ it("should render loading state initially", () => {
   const component = renderer.create(
     <MemoryRouter>
       <MockedProvider mocks={[]}>
-        <Organization />
+        <Repository />
       </MockedProvider>
     </MemoryRouter>
   );
@@ -34,7 +34,7 @@ it("should render total count", async () => {
   const component = renderer.create(
     <MemoryRouter>
       <MockedProvider mocks={mocks} addTypename={false}>
-        <Organization org="github" repo="fetch" issueState="OPEN" />
+        <Repository owner="github" repo="fetch" issueState="OPEN" />
       </MockedProvider>
     </MemoryRouter>
   );
@@ -46,18 +46,18 @@ it("should render total count", async () => {
 });
 //
 it("should render error", async () => {
-  const orgMock = {
+  const repoMock = {
     request: {
       query: GET_ISSUES_QUERY,
-      variables: { org: "github", repo: "fetch", issueState: "OPEN" }
+      variables: { owner: "github", repo: "fetch", issueState: "OPEN" }
     },
     error: new Error()
   };
 
   const component = renderer.create(
     <MemoryRouter>
-      <MockedProvider mocks={[orgMock]} addTypename={false}>
-        <Organization org="github" repo="fetch" issueState="OPEN" />
+      <MockedProvider mocks={[repoMock]} addTypename={false}>
+        <Repository owner="github" repo="fetch" issueState="OPEN" />
       </MockedProvider>
     </MemoryRouter>
   );
